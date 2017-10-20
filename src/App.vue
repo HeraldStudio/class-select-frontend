@@ -9,6 +9,7 @@
       p.footer 东南大学学生事务服务中心
       p.footer 小猴偷米工作室 联合开发
     div.select(v-else)
+      p.title 金钥匙助学选课系统
       div.group-group(v-if='list && list.length' v-for='ggroup in list')
         p.name {{ ggroup.name }}
         p.desc(v-if='ggroup.max_select') 本类别限选{{ ggroup.max_select }}个方向
@@ -29,6 +30,8 @@
           p.desc 空分类
       div.group-group(v-else)
         p.desc 无分类
+      p.footer 东南大学学生事务服务中心
+      p.footer 小猴偷米工作室 联合开发
 </template>
 
 <script>
@@ -165,6 +168,10 @@
       font-size 28px
       color #1cadc8
 
+    .footer
+      color #888
+      font-size 14px
+
     .form
       padding 40px 0
       display flex
@@ -196,38 +203,56 @@
         background #1cadc8
         color #fff
 
+  .select
+    max-width 600px
+    margin 0 auto
+    padding 40px 0
+    display flex
+    flex-direction column
+    align-items center
+    justify-content center
+
+    .title
+      font-size 28px
+      color #1cadc8
+
     .footer
       color #888
       font-size 14px
 
-  .select
-    max-width 600px
-    margin 0 auto
     .group-group
       display block
       margin 15px
       border 1px solid #1cadc8
       padding 10px 15px
       background #fafafa
+
+      +.group-group
+        margin-top 0
+
       .name
         font-size 17px
         color #333
         display inline-block
         font-weight bold
         margin-right 10px
+
       .desc
         font-size 14px
         color #888
         display inline-block
+
       .group
         display block
         margin 15px 0 5px
         border 1px solid #e4e4e4
         padding 10px 15px
         background #fff
+
         .name
           font-size 16px
           font-weight normal
+
         .class
           display flex
           flex-direction row
@@ -236,19 +261,23 @@
           border 1px solid #e4e4e4
           padding 10px 15px
           background #fafafa
+
           .pic
             width 30%
             height 100%
             object-fit cover
+
           .info
             margin 0 10px
             display flex
             flex-direction column
             align-items flex-start
             flex 1 1 0
+
             .count
               font-size 13px
               color #666
+
           .pick
             padding 10px 20px
             background none
