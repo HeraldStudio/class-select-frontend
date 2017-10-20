@@ -16,7 +16,7 @@
         div.group(v-if='ggroup.groups && ggroup.groups.length' v-for='group in ggroup.groups')
           p.name {{ group.name }}
           p.desc(v-if='group.max_select') 本方向限选{{ group.max_select }}个课程
-          div.class(v-if='group.classes && group.classes.length' v-for='clazz in group.classes')
+          div.class(:class='{ selected: clazz.selected }' v-if='group.classes && group.classes.length' v-for='clazz in group.classes')
             img.pic(:src='clazz.pic')
             div.info
               p.name {{ clazz.name }}
@@ -259,8 +259,12 @@
           align-items center
           margin 15px 0 5px
           border 1px solid #e4e4e4
-          padding 10px 15px
+          padding 11px 16px
           background #fafafa
+
+          &.selected
+            border 2px solid #1cadc8
+            padding 10px 15px
 
           .pic
             width 30%
@@ -281,8 +285,9 @@
           .pick
             padding 10px 20px
             background none
-            border 1px solid #1cadc8
-            color #1cadc8
+            border 1px solid #ccc
+            color #333
+            background #fff
             font-size 15px
 
 </style>
