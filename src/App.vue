@@ -111,6 +111,10 @@
   ::-webkit-scrollbar
     display none
 
+  #main
+    min-width 340px
+    margin 0 auto
+
   .logo
     width 100px
     height 100px
