@@ -1,15 +1,17 @@
 <template lang="pug">
   div#main
     div.login(v-if='!token')
-      p.title 金钥匙助学选课系统
+      img.logo(src='static/logo.jpg')
+      p.title 金钥匙计划选课系统
       div.form
-        input.cardnum(v-model='cardnum' placeholder='一卡通号')
-        input.schoolnum(v-model='schoolnum' placeholder='学号')
-        button.login(@click='login()') 登录
-      p.footer 东南大学学生事务服务中心
-      p.footer 小猴偷米工作室 联合开发
+        input.cardnum(@keydown.enter='login()' v-model='cardnum' placeholder='一卡通号')
+        input.schoolnum(@keydown.enter='login()' v-model='schoolnum' placeholder='学号')
+        button.submit(@click='login()') 登录
+      p.footer 东南大学学生事务服务中心 小猴偷米工作室 联合开发
+      p.footer 建议使用 Chrome / Safari / Firefox / Edge 浏览器
     div.select(v-else)
-      p.title 金钥匙助学选课系统
+      img.logo(src='static/logo.jpg')
+      p.title 金钥匙计划选课系统
       div.group-group(v-if='list && list.length' v-for='ggroup in list')
         p.name ▽ {{ ggroup.name }}
         p.desc(v-if='ggroup.max_select') 本类别限选{{ ggroup.max_select }}个方向
@@ -30,8 +32,7 @@
           p.desc 空分类
       div.group-group(v-else)
         p.desc 无分类
-      p.footer 东南大学学生事务服务中心
-      p.footer 小猴偷米工作室 联合开发
+      p.footer 东南大学学生事务服务中心 小猴偷米工作室 联合开发
 </template>
 
 <script>
@@ -81,6 +82,7 @@
 <style lang="stylus">
   *
     font-family 'PingFang SC', 'Microsoft YaHei UI', sans-serif
+    -webkit-user-select none
 
   html, body
     margin 0
@@ -103,55 +105,21 @@
   input, input:focus
     -webkit-appearance none
 
-  table tr
-    vertical-align: text-top
-    
-  [flex~="row"]
-    display flex
-    flex-direction row
-
-  [flex~="column"]
-    display flex
-    flex-direction column
-
-  [flex~="start"]
-    display flex
-    align-items flex-start
-
-  [flex~="end"]
-    display flex
-    align-items flex-end
-
-  [flex~="center"]
-    display flex
-    align-items center
-
-  [flex~="end"]
-    display flex
-    align-items flex-end
-
-  [flex~="center"]
-    display flex
-    align-items center
-
-  [flex~="stretch"]
-    display flex
-    align-items stretch
-
-  [flex~="grow"]
-    flex-grow 1
-
-  [flex~="noshrink"]
-    flex-shrink 0
-
   ::-webkit-scrollbar
     display none
 
-  .singleline
-    max-width 100%
-    overflow hidden
-    text-overflow ellipsis
-    white-space nowrap
+  .logo
+    width 100px
+    height 100px
+    margin-bottom 30px
+
+  .title
+    font-size 28px
+    color #333
+
+  .footer
+    color #888
+    font-size 14px
 
   .login
     position fixed
@@ -163,14 +131,6 @@
     flex-direction column
     align-items center
     justify-content center
-
-    .title
-      font-size 28px
-      color #1cadc8
-
-    .footer
-      color #888
-      font-size 14px
 
     .form
       padding 40px 0
@@ -192,7 +152,6 @@
         background #f0f0f0
 
       button
-        position static
         box-sizing border-box
         border none
         padding 10px
@@ -200,8 +159,11 @@
         margin 10px 0
         font-size 16px
         width 100%
-        background #1cadc8
+        background #00872f
         color #fff
+
+        &:active
+          background #005d20
 
   .select
     max-width 600px
@@ -211,14 +173,6 @@
     flex-direction column
     align-items center
     justify-content center
-
-    .title
-      font-size 28px
-      color #1cadc8
-
-    .footer
-      color #888
-      font-size 14px
 
     .group-group
       display block
@@ -230,7 +184,7 @@
 
       .name
         font-size 18px
-        color #1cadc8
+        color #00872f
         display inline-block
         margin 0 10px
 
@@ -262,10 +216,6 @@
           padding 11px 16px
           background #fff
 
-          &.selected
-            border 2px solid #1cadc8
-            padding 10px 15px
-
           .pic
             width 30%
             height 100%
@@ -286,13 +236,23 @@
           .pick
             padding 10px 20px
             margin 5px 0
-            background none
-            border 1px solid #ccc
-            color #333
-            background #fff
+            color #fff
+            background #00872f
             font-size 15px
 
             &:active
-              background #f0f0f0
+              background #005d20
+
+          &.selected
+            border 2px solid #00872f
+            padding 10px 15px
+
+            .pick
+              border 1px solid #ccc
+              color #333
+              background #fff
+
+              &:active
+                background #f0f0f0
 
 </style>
