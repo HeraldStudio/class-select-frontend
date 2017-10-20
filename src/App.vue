@@ -9,16 +9,18 @@
         button.submit(@click='login()') 登录
       p.footer 东南大学学生事务服务中心 小猴偷米工作室 联合开发
       p.footer 建议使用 Chrome / Safari / Firefox / Edge 浏览器
-      p.footer 选课结束后请以正式公布名单为准
+      p.footer 选课仅代表个人意向，结果请以公布名单为准
     div.select(v-else)
       img.logo(src='static/logo.jpg' ondragstart='return false')
       p.title 金钥匙计划选课系统
       div.group-group(v-if='list && list.length' v-for='ggroup in list')
         p.name ▽ {{ ggroup.name }}
-        p.desc(v-if='ggroup.max_select') 本类别限选{{ ggroup.max_select }}个方向
+        p.desc(v-if='ggroup.max_select && ggroup.groups.length > 1') 本类别限选{{ ggroup.max_select }}个方向
+        p.desc(v-else-if='ggroup.groups.length > 1') 以下方向任选
         div.group(v-if='ggroup.groups && ggroup.groups.length' v-for='group in ggroup.groups')
           p.name {{ group.name }}
-          p.desc(v-if='group.max_select') 本方向限选{{ group.max_select }}个课程
+          p.desc(v-if='group.max_select && group.classes.length > 1') 本方向限选{{ group.max_select }}个课程
+          p.desc(v-else-if='group.classes.length > 1') 以下课程任选
           div.class(:class='{ selected: clazz.selected }' v-if='group.classes && group.classes.length' v-for='clazz in group.classes')
             img.pic(:src='clazz.pic' ondragstart='return false')
             div.info
@@ -33,7 +35,7 @@
           p.desc 空分类
       div.group-group(v-else)
         p.desc 无分类
-      p.footer 东南大学学生事务服务中心 小猴偷米工作室 联合开发
+      p.footer 选课仅代表个人意向，结果请以公布名单为准
 </template>
 
 <script>
@@ -178,7 +180,7 @@
     .group-group
       display block
       padding 10px 15px
-      margin-top 20px
+      margin-top 40px
 
       +.group-group
         margin-top 0
