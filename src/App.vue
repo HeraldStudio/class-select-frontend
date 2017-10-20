@@ -11,7 +11,7 @@
     div.select(v-else)
       p.title 金钥匙助学选课系统
       div.group-group(v-if='list && list.length' v-for='ggroup in list')
-        p.name {{ ggroup.name }}
+        p.name ▽ {{ ggroup.name }}
         p.desc(v-if='ggroup.max_select') 本类别限选{{ ggroup.max_select }}个方向
         div.group(v-if='ggroup.groups && ggroup.groups.length' v-for='group in ggroup.groups')
           p.name {{ group.name }}
@@ -222,20 +222,17 @@
 
     .group-group
       display block
-      margin 15px
-      border 1px solid #1cadc8
       padding 10px 15px
-      background #fafafa
+      margin-top 20px
 
       +.group-group
         margin-top 0
 
       .name
-        font-size 17px
-        color #333
+        font-size 18px
+        color #1cadc8
         display inline-block
-        font-weight bold
-        margin-right 10px
+        margin 0 10px
 
       .desc
         font-size 14px
@@ -247,20 +244,23 @@
         margin 15px 0 5px
         border 1px solid #e4e4e4
         padding 10px 15px
-        background #fff
+        background #fafafa
 
         .name
           font-size 16px
           font-weight normal
+          color #333
+          margin-left 0
 
         .class
           display flex
-          flex-direction row
+          flex-flow row wrap
+          justify-content flex-end
           align-items center
           margin 15px 0 5px
           border 1px solid #e4e4e4
           padding 11px 16px
-          background #fafafa
+          background #fff
 
           &.selected
             border 2px solid #1cadc8
@@ -272,11 +272,12 @@
             object-fit cover
 
           .info
-            margin 0 10px
+            margin 10px 10px
             display flex
             flex-direction column
             align-items flex-start
             flex 1 1 0
+            min-width 150px
 
             .count
               font-size 13px
@@ -284,6 +285,7 @@
 
           .pick
             padding 10px 20px
+            margin 5px 0
             background none
             border 1px solid #ccc
             color #333
