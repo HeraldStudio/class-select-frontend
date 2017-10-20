@@ -1,7 +1,7 @@
 <template lang="pug">
   div#main
     div.login(v-if='!token')
-      img.logo(src='static/logo.jpg')
+      img.logo(src='static/logo.jpg' ondragstart='return false')
       p.title 金钥匙计划选课系统
       div.form
         input.cardnum(@keydown.enter='login()' v-model='cardnum' placeholder='一卡通号')
@@ -9,8 +9,9 @@
         button.submit(@click='login()') 登录
       p.footer 东南大学学生事务服务中心 小猴偷米工作室 联合开发
       p.footer 建议使用 Chrome / Safari / Firefox / Edge 浏览器
+      p.footer 选课结束后请以正式公布名单为准
     div.select(v-else)
-      img.logo(src='static/logo.jpg')
+      img.logo(src='static/logo.jpg' ondragstart='return false')
       p.title 金钥匙计划选课系统
       div.group-group(v-if='list && list.length' v-for='ggroup in list')
         p.name ▽ {{ ggroup.name }}
@@ -19,7 +20,7 @@
           p.name {{ group.name }}
           p.desc(v-if='group.max_select') 本方向限选{{ group.max_select }}个课程
           div.class(:class='{ selected: clazz.selected }' v-if='group.classes && group.classes.length' v-for='clazz in group.classes')
-            img.pic(:src='clazz.pic')
+            img.pic(:src='clazz.pic' ondragstart='return false')
             div.info
               p.name {{ clazz.name }}
               p.desc {{ clazz.desc }}
