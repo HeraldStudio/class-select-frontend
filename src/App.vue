@@ -22,7 +22,7 @@
               p.name {{ clazz.name }}
               p.desc {{ clazz.desc }}
               p.count 剩余{{ clazz.capacity - clazz.count }}名额
-            button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected') 取消选择
+            button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected') 退选
             button.pick(@click='select(clazz.cid)' v-else) 选择
           div.class(v-else)
             p.desc 该方向下没有课程
