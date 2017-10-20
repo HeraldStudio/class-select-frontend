@@ -4,8 +4,8 @@
       img.logo(src='static/logo.jpg' ondragstart='return false')
       p.title 金钥匙计划选课系统
       div.form
-        input.cardnum(@keydown.enter='login()' v-model='cardnum' placeholder='一卡通号')
-        input.schoolnum(@keydown.enter='login()' v-model='schoolnum' placeholder='学号')
+        input.cardnum(@keypress.enter='login()' v-model='cardnum' placeholder='一卡通号')
+        input.schoolnum(@keypress.enter='login()' v-model='schoolnum' placeholder='学号')
         button.submit(@click='login()') 登录
       p.footer 东南大学学生事务服务中心 小猴偷米工作室 联合开发
       p.footer 建议使用 Chrome / Safari / Firefox / Edge 浏览器
