@@ -85,7 +85,7 @@
 <style lang="stylus">
   *
     font-family 'PingFang SC', 'Microsoft YaHei UI', sans-serif
-    -webkit-user-select none
+    /*-webkit-user-select none*/
 
   html, body
     margin 0
