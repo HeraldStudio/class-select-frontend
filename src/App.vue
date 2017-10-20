@@ -58,7 +58,7 @@
     methods: {
       async login() {
         let token = (await api.post('login',
-          `cardnum=${this.cardnum}&schoolnum=${this.schoolnum}`)
+            `cardnum=${this.cardnum}&schoolnum=${this.schoolnum}`)
         ).data
         if (/^[0-9a-fA-F]{32}$/.test(token)) {
           this.token = token
