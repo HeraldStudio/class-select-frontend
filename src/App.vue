@@ -275,8 +275,8 @@
 
           .pic
             width 30%
-            height 100%
-            max-height 90px
+            min-width 90px
+            height 90px
             object-fit cover
             overflow hidden
             border-radius 4px
