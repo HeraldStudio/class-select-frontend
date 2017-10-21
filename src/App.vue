@@ -219,6 +219,9 @@
           padding 11px 16px
           background #fff
 
+          .name
+            line-height 1.6em
+
           .pic
             width 30%
             height 100%
