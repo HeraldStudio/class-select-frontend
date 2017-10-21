@@ -10,9 +10,14 @@ const api = axios.create({
 
 async function testUser(id) {
   let name = 'test' + id
-  let token = (await api.put('login', `cardnum=${name}&schoolnum=${name}&name=${name}`)).data
+  let res = (await api.put('login', `cardnum=${name}&schoolnum=${name}&name=${name}`)).data
+  if (res !== 'OK') {
+    console.log('创建用户失败')
+  }
+
+  let token = (await api.post('login', `cardnum=${name}&schoolnum=${name}`)).data
   if (!/^[0-9a-fA-F]{32}$/.test(token)) {
-    console.log('Token error', token)
+    console.log('Token错误', token)
   }
 
   let classes = (await api.get(`class?token=${token}`)).data
