@@ -198,7 +198,7 @@
 
       .group
         display block
-        margin 15px 0 5px
+        margin 15px 0
         border 1px solid #e4e4e4
         padding 10px 15px
         background #fafafa
