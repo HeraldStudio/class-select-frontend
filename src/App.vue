@@ -266,7 +266,7 @@
           align-items center
           margin 15px 0 5px
           border 1px solid #e4e4e4
-          padding 11px 16px
+          padding 16px 16px
           background #fff
           border-radius 4px
 
@@ -306,7 +306,7 @@
 
           &.selected
             border 2px solid #00872f
-            padding 10px 15px
+            padding 15px 15px
 
             .pick
               border 1px solid #ccc
