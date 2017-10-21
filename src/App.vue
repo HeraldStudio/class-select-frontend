@@ -13,6 +13,13 @@
     div.select(v-else)
       img.logo(src='static/logo.jpg' ondragstart='return false')
       p.title 金钥匙计划选课系统
+      div.toolbar
+        div.operation(@click='reloadClasses(true)' v-bind:class='{ disabled: !canRefresh }')
+          img(src='static/refresh.png')
+          p 刷新
+        div.operation(@click='logout()')
+          img(src='static/logout.png')
+          p 退出登录
       div.group-group(v-if='list && list.length' v-for='ggroup in list')
         p.name ▽ {{ ggroup.name }}
         p.desc(v-if='ggroup.max_select && ggroup.groups.length > 1') 本类别限选{{ ggroup.max_select }}个方向
@@ -49,11 +56,18 @@
         cardnum: '',
         schoolnum: '',
         token: null,
-        list: []
+        list: [],
+        canRefresh: true
       }
     },
     async created () {
       logger.bindAjax()
+      let cachedToken = localStorage.getItem('token')
+      if (/^[0-9a-fA-F]{32}$/.test(cachedToken)) {
+        this.token = cachedToken
+        localStorage.setItem('token', cachedToken)
+        await this.reloadClasses()
+      }
     },
     methods: {
       async login() {
@@ -62,11 +76,24 @@
         ).data
         if (/^[0-9a-fA-F]{32}$/.test(token)) {
           this.token = token
+          localStorage.setItem('token', token)
           await this.reloadClasses()
         }
       },
-      async reloadClasses() {
-        this.list = (await api.get(`class?token=${this.token}`)).data
+      async logout() {
+        this.list = []
+        this.token = null
+        this.cardnum = ''
+        this.schoolnum = ''
+        localStorage.setItem('token', null)
+      },
+      async reloadClasses(visualize = false) {
+        if (this.canRefresh) {
+          if (visualize) this.list = []
+          this.list = (await api.get(`class?token=${this.token}`)).data
+          this.canRefresh = false
+          setTimeout(() => this.canRefresh = true, 3000)
+        }
       },
       async select(cid) {
         let res = (await api.post('class', `token=${this.token}&cid=${cid}`)).data
@@ -176,6 +203,28 @@
     flex-direction column
     align-items center
     justify-content center
+
+    .toolbar
+      display flex
+      flex-direction row
+      padding 20px 0
+
+      .operation
+        display flex
+        flex-direction row
+        align-items center
+        margin 0 10px
+        font-size 15px
+        color #333
+
+        &.disabled
+          opacity .3
+
+        img
+          width 16px
+          height 16px
+          margin-right 5px
+          object-fit contain
 
     .group-group
       display block
