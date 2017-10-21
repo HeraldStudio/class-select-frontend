@@ -70,7 +70,7 @@
       if (/^[0-9a-fA-F]{32}$/.test(cachedToken)) {
         this.token = cachedToken
         this.username = cachedName
-        await this.reloadClasses()
+        await this.reloadClasses(false, true)
       }
     },
     methods: {
@@ -94,12 +94,14 @@
         localStorage.setItem('token', null)
         localStorage.setItem('username', null)
       },
-      async reloadClasses(visualize = false) {
-        if (this.canRefresh) {
+      async reloadClasses(visualize = false, force = false) {
+        if (this.canRefresh || force) {
           if (visualize) this.list = []
           this.list = (await api.get(`class?token=${this.token}`)).data
-          this.canRefresh = false
-          setTimeout(() => this.canRefresh = true, 3000)
+          if (!force) {
+            this.canRefresh = false
+            setTimeout(() => this.canRefresh = true, 3000)
+          }
         }
       },
       async select(cid) {
