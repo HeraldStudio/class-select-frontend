@@ -15,7 +15,7 @@
       p.title 金钥匙计划选课系统
       div.toolbar
         div.operation
-          p {{ username }}
+          p 欢迎，{{ username }}
         div.operation(@click='reloadClasses(true)' v-bind:class='{ disabled: !canRefresh }')
           img(src='static/refresh.png')
           p 刷新
