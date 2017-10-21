@@ -202,6 +202,7 @@
         border 1px solid #e4e4e4
         padding 10px 15px
         background #fafafa
+        border-radius 4px
 
         .name
           font-size 16px
@@ -218,6 +219,7 @@
           border 1px solid #e4e4e4
           padding 11px 16px
           background #fff
+          border-radius 4px
 
           .name
             line-height 1.6em
@@ -227,6 +229,8 @@
             height 100%
             max-height 90px
             object-fit cover
+            overflow hidden
+            border-radius 4px
 
           .info
             margin 10px 15px
@@ -246,6 +250,7 @@
             color #fff
             background #00872f
             font-size 15px
+            border-radius 4px
 
             &:active
               background #005d20
