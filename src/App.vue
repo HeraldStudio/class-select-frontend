@@ -16,7 +16,7 @@
       div.toolbar
         div.operation
           p 欢迎，{{ username }}
-        div.operation(@click='reloadClasses(true)' v-bind:class='{ disabled: !canRefresh }')
+        div.operation(@click='reloadClasses(true, false)' v-bind:class='{ disabled: !canRefresh }')
           img(src='static/refresh.png')
           p 刷新
         div.operation(@click='logout()')
@@ -83,7 +83,7 @@
           this.username = res.username
           localStorage.setItem('token', res.token)
           localStorage.setItem('username', res.username)
-          await this.reloadClasses()
+          await this.reloadClasses(false, true)
         }
       },
       async logout() {
@@ -107,12 +107,12 @@
       async select(cid) {
         let res = (await api.post('class', `token=${this.token}&cid=${cid}`)).data
         if (res) alert(res)
-        await this.reloadClasses()
+        await this.reloadClasses(false, true)
       },
       async deselect(cid) {
         let res = (await api.delete(`class?token=${this.token}&cid=${cid}`)).data
         if (res) alert(res)
-        await this.reloadClasses()
+        await this.reloadClasses(false, true)
       }
     }
   }
