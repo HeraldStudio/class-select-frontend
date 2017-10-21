@@ -222,10 +222,11 @@
           .pic
             width 30%
             height 100%
+            max-height 90px
             object-fit cover
 
           .info
-            margin 10px 10px
+            margin 10px 15px
             display flex
             flex-direction column
             align-items flex-start
