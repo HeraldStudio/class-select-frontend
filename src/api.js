@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default axios.create({
   baseURL: 'http://myseu.cn:8087/',
-  timeout: 3000,
+  timeout: 10000,
   validateStatus (status) {
     if (status >= 400) {
       alert(`[${status}] 服务器出错，请稍后重试`)
