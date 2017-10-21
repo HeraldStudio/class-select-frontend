@@ -295,7 +295,6 @@
 
           .pick
             padding 10px 20px
-            margin 5px 0
             color #fff
             background #00872f
             font-size 15px
