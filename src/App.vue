@@ -56,6 +56,7 @@
         cardnum: '',
         schoolnum: '',
         token: null,
+        username: '',
         list: [],
         canRefresh: true
       }
@@ -63,20 +64,23 @@
     async created () {
       logger.bindAjax()
       let cachedToken = localStorage.getItem('token')
+      let cachedName = localStorage.getItem('username')
       if (/^[0-9a-fA-F]{32}$/.test(cachedToken)) {
         this.token = cachedToken
-        localStorage.setItem('token', cachedToken)
+        this.username = cachedName
         await this.reloadClasses()
       }
     },
     methods: {
       async login() {
-        let token = (await api.post('login',
+        let res = (await api.post('login',
             `cardnum=${this.cardnum}&schoolnum=${this.schoolnum}`)
         ).data
-        if (/^[0-9a-fA-F]{32}$/.test(token)) {
-          this.token = token
-          localStorage.setItem('token', token)
+        if (/^[0-9a-fA-F]{32}$/.test(res.token)) {
+          this.token = res.token
+          this.username = res.username
+          localStorage.setItem('token', res.token)
+          localStorage.setItem('username', res.username)
           await this.reloadClasses()
         }
       },
@@ -86,6 +90,7 @@
         this.cardnum = ''
         this.schoolnum = ''
         localStorage.setItem('token', null)
+        localStorage.setItem('username', null)
       },
       async reloadClasses(visualize = false) {
         if (this.canRefresh) {
