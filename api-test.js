@@ -25,10 +25,9 @@ async function testUser(id) {
   }
 
   let classes = (await api.get(`class?token=${token}`)).data
-  // for (let ggroup of classes) {
-  //   for (let group of ggroup.groups) {
-  //     for (let clazz of group.classes) {
-  for (let clazz of classes) {
+  for (let ggroup of classes) {
+    for (let group of ggroup.groups) {
+      for (let clazz of group.classes) {
         if (!clazz.selected && clazz.count < clazz.capacity) {
 
           await sleep(Math.random() * 4 + 3)
@@ -37,8 +36,8 @@ async function testUser(id) {
           console.log(res)
           await api.get(`class?token=${token}`)
         }
-    //   }
-    // }
+      }
+    }
   }
 
   console.log('Finish')
