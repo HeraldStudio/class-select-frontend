@@ -101,9 +101,11 @@
       async reloadClasses(visualize = false, force = false) {
         if (this.canRefresh || force) {
           if (visualize) this.list = []
-          this.list = (await api.get(`class?token=${this.token}`)).data
           if (!force) {
             this.canRefresh = false
+          }
+          this.list = (await api.get(`class?token=${this.token}`)).data
+          if (!force) {
             setTimeout(() => this.canRefresh = true, 3000)
           }
         }
