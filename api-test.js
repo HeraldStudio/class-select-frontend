@@ -15,7 +15,7 @@ async function testUser(id) {
     console.log('创建用户失败')
   }
 
-  let token = (await api.post('login', `cardnum=${name}&schoolnum=${name}`)).data.token
+  let token = (await api.post('login', `cardnum=${name}&schoolnum=${name}&phone=10000000000`)).data.token
   if (!/^[0-9a-fA-F]{32}$/.test(token)) {
     console.log('Token错误', token)
   }
