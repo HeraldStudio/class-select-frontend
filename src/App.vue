@@ -94,6 +94,7 @@
         this.cardnum = ''
         this.schoolnum = ''
         this.phone = ''
+        this.username = ''
         localStorage.setItem('token', null)
         localStorage.setItem('username', null)
       },
