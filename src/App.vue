@@ -44,7 +44,7 @@
         div.group(v-if='!ggroup.groups.length')
           p.desc 空分类
       div.group-group(v-if='!list.length')
-        p.desc 无分类
+        p.desc 系统繁忙，加载需要几秒钟时间，请稍候
       p.footer 选课仅代表个人意向，结果请以公布名单为准
 </template>
 
