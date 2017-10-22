@@ -17,7 +17,7 @@
       div.toolbar
         div.operation
           p 欢迎，{{ username }}
-        div.operation(@click='reloadClasses(true, false)' v-bind:class='{ disabled: !canRefresh }')
+        div.operation(@click='reloadClasses(false, false)' v-bind:class='{ disabled: !canRefresh }')
           img(src='static/refresh.png')
           p 刷新
         div.operation(@click='logout()')
