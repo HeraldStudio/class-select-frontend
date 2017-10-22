@@ -1,4 +1,7 @@
 const axios = require('axios')
+const sleep = async (ms) => {
+  await new Promise(r => setTimeout(r, ms))
+}
 
 const api = axios.create({
   baseURL: 'http://myseu.cn:8087',
@@ -25,9 +28,12 @@ async function testUser(id) {
     for (let group of ggroup.groups) {
       for (let clazz of group.classes) {
         if (!clazz.selected && clazz.count < clazz.capacity) {
+
+          await sleep(5)
           let cid = clazz.cid
           let res = (await api.post('class', `token=${token}&cid=${cid}`)).data
           console.log(res)
+          await api.get(`class?token=${token}`)
         }
       }
     }
