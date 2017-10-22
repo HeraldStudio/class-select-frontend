@@ -6,6 +6,7 @@
       div.form
         input.cardnum(@keypress.enter='login()' v-model='cardnum' placeholder='一卡通号')
         input.schoolnum(@keypress.enter='login()' v-model='schoolnum' placeholder='学号')
+        input.phone(@keypress.enter='login()' v-model='phone' placeholder='手机号码（若已设置可不填）')
         button.submit(@click='login()') 登录
       p.footer 东南大学学生事务服务中心 小猴偷米工作室 联合开发
       p.footer 建议使用 Chrome / Safari / Firefox / Edge 浏览器
@@ -57,6 +58,7 @@
       return {
         cardnum: '',
         schoolnum: '',
+        phone: '',
         token: null,
         username: '',
         list: [],
@@ -76,7 +78,7 @@
     methods: {
       async login() {
         let res = (await api.post('login',
-            `cardnum=${this.cardnum}&schoolnum=${this.schoolnum}`)
+            `cardnum=${this.cardnum}&schoolnum=${this.schoolnum}&phone=${this.phone}`)
         ).data
         if (/^[0-9a-fA-F]{32}$/.test(res.token)) {
           this.token = res.token
