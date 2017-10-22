@@ -36,7 +36,8 @@
             div.info
               p.name {{ clazz.name }}
               p.desc {{ clazz.desc }}
-              p.count 剩余不到{{ clazz.capacity - clazz.count }}个名额
+              p.count(v-if='clazz.capacity - clazz.count') 剩余不到{{ clazz.capacity - clazz.count }}个名额
+              p.count(v-else) 已满
             button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected') 退选
             button.pick(@click='select(clazz.cid)' v-else) 选择
           div.empty(v-if='!group.classes.length')
