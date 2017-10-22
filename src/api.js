@@ -15,6 +15,6 @@ export default axios.create({
       alert(res.content)
       return null
     }
-    return res.content
+    return res
   }
 })

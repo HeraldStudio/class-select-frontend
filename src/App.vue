@@ -36,7 +36,7 @@
             div.info
               p.name {{ clazz.name }}
               p.desc {{ clazz.desc }}
-              p.count 剩余{{ clazz.capacity - clazz.count }}名额
+              p.count 共{{ clazz.capacity }}名额
             button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected') 退选
             button.pick(@click='select(clazz.cid)' v-else) 选择
           div.class(v-else)
@@ -79,7 +79,7 @@
       async login() {
         let res = (await api.post('login',
             `cardnum=${this.cardnum}&schoolnum=${this.schoolnum}&phone=${this.phone}`)
-        ).data
+        ).data.content
         if (/^[0-9a-fA-F]{32}$/.test(res.token)) {
           this.token = res.token
           this.username = res.username
@@ -104,7 +104,7 @@
           if (!force) {
             this.canRefresh = false
           }
-          this.list = (await api.get(`class?token=${this.token}`)).data
+          this.list = (await api.get(`class?token=${this.token}`)).data.content
           if (!force) {
             setTimeout(() => this.canRefresh = true, 3000)
           }
@@ -112,12 +112,36 @@
       },
       async select(cid) {
         let res = (await api.post('class', `token=${this.token}&cid=${cid}`)).data
-        if (res) alert(res)
+        if (res.code < 400) {
+          alert(res.content)
+          this.list = this.list.map(k => {
+            k.groups = k.groups.map(g => {
+              g.classes = g.classes.map(c => {
+                if (c.cid === cid) c.selected = true
+                return c
+              })
+              return g
+            })
+            return k
+          })
+        }
 //        await this.reloadClasses(false, true)
       },
       async deselect(cid) {
         let res = (await api.delete(`class?token=${this.token}&cid=${cid}`)).data
-        if (res) alert(res)
+        if (res.code < 400) {
+          alert(res.content)
+          this.list = this.list.map(k => {
+            k.groups = k.groups.map(g => {
+              g.classes = g.classes.map(c => {
+                if (c.cid === cid) c.selected = false
+                return c
+              })
+              return g
+            })
+            return k
+          })
+        }
 //        await this.reloadClasses(false, true)
       }
     }
