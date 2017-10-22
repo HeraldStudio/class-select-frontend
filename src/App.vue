@@ -39,12 +39,12 @@
               p.count 共{{ clazz.capacity }}名额
             button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected') 退选
             button.pick(@click='select(clazz.cid)' v-else) 选择
-          div.class(v-if='!group.classes.length')
-            p.desc 该方向下没有课程
-        div.group(v-if='!ggroup.groups.length')
-          p.desc 空分类
-      div.group-group(v-if='!list.length')
-        p.desc 系统繁忙，加载需要几秒钟时间，请稍候
+          div.empty(v-if='!group.classes.length')
+            p 该方向下没有课程
+        div.empty(v-if='!ggroup.groups.length')
+          p 空分类
+      div.empty(v-if='!list.length')
+        p 系统繁忙，加载需要几秒钟时间，请稍候
       p.footer 选课仅代表个人意向，结果请以公布名单为准
 </template>
 
@@ -264,6 +264,11 @@
           height 16px
           margin-right 5px
           object-fit contain
+
+    .empty
+      padding 20px 0
+      color #005d20
+      font-size 15px
 
     .group-group
       display block
