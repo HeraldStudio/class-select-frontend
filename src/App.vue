@@ -113,12 +113,12 @@
       async select(cid) {
         let res = (await api.post('class', `token=${this.token}&cid=${cid}`)).data
         if (res) alert(res)
-        await this.reloadClasses(false, true)
+//        await this.reloadClasses(false, true)
       },
       async deselect(cid) {
         let res = (await api.delete(`class?token=${this.token}&cid=${cid}`)).data
         if (res) alert(res)
-        await this.reloadClasses(false, true)
+//        await this.reloadClasses(false, true)
       }
     }
   }
