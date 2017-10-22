@@ -34,7 +34,10 @@ async function testUser(id) {
           let cid = clazz.cid
           let res = (await api.post('class', `token=${token}&cid=${cid}`)).data
           console.log(res)
-          await api.get(`class?token=${token}`)
+
+          if (Math.random() < 0.1) {
+            await api.get(`class?token=${token}`)
+          }
         }
       }
     }
