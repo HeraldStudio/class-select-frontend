@@ -93,6 +93,7 @@
         this.token = null
         this.cardnum = ''
         this.schoolnum = ''
+        this.phone = ''
         localStorage.setItem('token', null)
         localStorage.setItem('username', null)
       },
