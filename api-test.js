@@ -29,7 +29,7 @@ async function testUser(id) {
       for (let clazz of group.classes) {
         if (!clazz.selected && clazz.count < clazz.capacity) {
 
-          await sleep(5)
+          await sleep(Math.random() * 4 + 3)
           let cid = clazz.cid
           let res = (await api.post('class', `token=${token}&cid=${cid}`)).data
           console.log(res)
