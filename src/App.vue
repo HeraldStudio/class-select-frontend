@@ -1,6 +1,6 @@
 <template lang="pug">
-  vue-loading(:is-show='isLoading' toast-text='请稍候')
   div#main
+    vue-loading(:is-show='isLoading' toast-text='请稍候')
     div.login(v-if='!token')
       img.logo(src='static/logo.jpg' ondragstart='return false')
       p.title 金钥匙计划选课系统
