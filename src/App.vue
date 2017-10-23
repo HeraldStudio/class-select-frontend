@@ -114,7 +114,12 @@
             this.canRefresh = false
           }
           this.isLoading = true
-          this.list = (await api.get(`class?token=${this.token}`)).data.content
+          let res = (await api.get(`class?token=${this.token}`)).data
+          if (res.code === 403) {
+            await this.logout()
+            return
+          }
+          this.list = res.content
           this.isLoading = false
           if (!force) {
             setTimeout(() => this.canRefresh = true, 3000)
