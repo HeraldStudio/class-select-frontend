@@ -13,7 +13,6 @@ export default axios.create({
     res = JSON.parse(res)
     if (res.code >= 400) {
       alert(res.content)
-      return null
     }
     return res
   }
