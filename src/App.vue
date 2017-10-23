@@ -192,6 +192,9 @@
   ::-webkit-scrollbar
     display none
 
+  .js-toast-container
+    position fixed
+
   .logo
     width 100px
     height 100px
