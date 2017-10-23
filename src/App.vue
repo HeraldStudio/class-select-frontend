@@ -117,6 +117,7 @@
           let res = (await api.get(`class?token=${this.token}`)).data
           if (res.code === 403) {
             await this.logout()
+            this.isLoading = false
             return
           }
           this.list = res.content
