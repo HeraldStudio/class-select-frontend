@@ -193,7 +193,7 @@
     display none
 
   .js-toast-container
-    position fixed
+    position fixed !important
 
   .logo
     width 100px
