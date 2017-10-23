@@ -53,9 +53,13 @@
 <script>
   import logger from './logger'
   import api from './api'
+  import vueLoading from 'vue-componnet-loading'
 
   export default {
     name: 'app',
+    components: {
+      vueLoading
+    },
     data() {
       return {
         cardnum: '',
