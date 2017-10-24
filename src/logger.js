@@ -76,6 +76,24 @@ export class Log {
 
 export default {
 
+  bindXhrOpen(fun) {
+    let xhrOpen = XMLHttpRequest.prototype.open
+    XMLHttpRequest.prototype.open = function (...args) {
+      fun(this)
+      xhrOpen.apply(this, args)
+    }
+  },
+
+  bindXhrDone(fun) {
+    let xhrSend = XMLHttpRequest.prototype.send
+    XMLHttpRequest.prototype.send = function (data) {
+      this.addEventListener('readystatechange', () => {
+        fun(this)
+      });
+      xhrSend.call(this, data);
+    };
+  },
+
   bindAjax() {
     try {
       let that = this

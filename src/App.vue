@@ -74,6 +74,9 @@
     },
     async created () {
       logger.bindAjax()
+      logger.bindXhrOpen(() => this.isLoading = true)
+      logger.bindXhrDone(() => this.isLoading = false)
+
       let cachedToken = localStorage.getItem('token')
       let cachedName = localStorage.getItem('username')
       if (/^[0-9a-fA-F]{32}$/.test(cachedToken)) {
@@ -84,11 +87,9 @@
     },
     methods: {
       async login() {
-        this.isLoading = true
         let res = (await api.post('login',
             `cardnum=${this.cardnum}&schoolnum=${this.schoolnum}&phone=${this.phone}`)
         ).data.content
-        this.isLoading = false
         if (/^[0-9a-fA-F]{32}$/.test(res.token)) {
           this.token = res.token
           this.username = res.username
@@ -113,24 +114,19 @@
           if (!force) {
             this.canRefresh = false
           }
-          this.isLoading = true
           let res = (await api.get(`class?token=${this.token}`)).data
           if (res.code === 403) {
             await this.logout()
-            this.isLoading = false
             return
           }
           this.list = res.content
-          this.isLoading = false
           if (!force) {
             setTimeout(() => this.canRefresh = true, 3000)
           }
         }
       },
       async select(cid) {
-        this.isLoading = true
         let res = (await api.post('class', `token=${this.token}&cid=${cid}`)).data
-        this.isLoading = false
         if (res.code < 400) {
           alert(res.content)
           this.list = this.list.map(k => {
@@ -147,9 +143,7 @@
 //        await this.reloadClasses(false, true)
       },
       async deselect(cid) {
-        this.isLoading = true
         let res = (await api.delete(`class?token=${this.token}&cid=${cid}`)).data
-        this.isLoading = false
         if (res.code < 400) {
           alert(res.content)
           this.list = this.list.map(k => {
