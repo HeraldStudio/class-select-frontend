@@ -7,7 +7,7 @@ let requests = 0
 let start = Date.now()
 
 const api = axios.create({
-  baseURL: 'http://as.myseu.cn:8087',
+  baseURL: 'http://localhost:8087',
   timeout: 20000,
   transformResponse (data) {
     requests++
