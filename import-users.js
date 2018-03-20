@@ -3,7 +3,7 @@ const fs = require('fs');
 const sem = new (require('await-semaphore').Semaphore)(10)
 
 const api = axios.create({
-  baseURL: 'http://myseu.cn:8087',
+  baseURL: 'http://as.myseu.cn:8087',
   timeout: 20000,
   transformResponse (data) {
     return JSON.parse(data).content

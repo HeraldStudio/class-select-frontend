@@ -115,3 +115,4 @@ gen
 dist
 deploy.sh
 pks.csv
+/**/.DS_Store
