@@ -26,11 +26,11 @@
           p 退出登录
       div.group-group(v-if='list && list.length' v-for='ggroup in list')
         p.name ▽ {{ ggroup.name }}
-        p.desc(v-if='ggroup.max_select && ggroup.groups.length > 1') 本类别限选{{ ggroup.max_select }}个方向
+        p.desc(v-if='ggroup.maxSelect && ggroup.groups.length > 1') 本类别限选{{ ggroup.maxSelect }}个方向
         p.desc(v-else-if='ggroup.groups.length > 1') 以下方向任选
         div.group(v-if='ggroup.groups && ggroup.groups.length' v-for='group in ggroup.groups')
           p.name {{ group.name }}
-          p.desc(v-if='group.max_select && group.classes.length > 1') 本方向限选{{ group.max_select }}个课程
+          p.desc(v-if='group.maxSelect && group.classes.length > 1') 本方向限选{{ group.maxSelect }}个课程
           p.desc(v-else-if='group.classes.length > 1') 以下课程任选
           div.class(:class='{ selected: clazz.selected }' v-if='group.classes && group.classes.length' v-for='clazz in group.classes')
             img.pic(:src='clazz.pic' ondragstart='return false')
