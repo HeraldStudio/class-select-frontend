@@ -33,12 +33,11 @@
           p.desc(v-if='group.maxSelect && group.classes.length > 1') 本方向限选{{ group.maxSelect }}个课程
           p.desc(v-else-if='group.classes.length > 1') 以下课程任选
           div.class(:class='{ selected: clazz.selected }' v-if='group.classes && group.classes.length' v-for='clazz in group.classes')
-            img.pic(:src='clazz.pic' ondragstart='return false')
             div.info
               p.name {{ clazz.name }}
-              p.desc {{ clazz.desc }}
-              p.count(v-if='clazz.capacity - clazz.count') 剩余约{{ clazz.capacity - clazz.count }}个名额
-              p.count(v-else) 名额已满
+              p.desc {{ clazz.desc }}；
+                span(v-if='clazz.capacity - clazz.count') 剩余约{{ clazz.capacity - clazz.count }}个名额
+                span(v-else) 名额已满
             button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected') 退选
             button.pick(@click='select(clazz.cid)' v-else) 选择
           div.empty(v-if='!group.classes.length')
@@ -115,7 +114,7 @@
             this.canRefresh = false
           }
           let res = (await api.get(`class?token=${this.token}`)).data
-          if (res.code === 403) {
+          if (res.code === 401 || res.code === 403 || res.code === 404) {
             await this.logout()
             return
           }
@@ -290,8 +289,11 @@
 
     .group-group
       display block
-      padding 10px 15px
+      padding 10px 45px
       margin-top 40px
+      width 100%
+      max-width 600px
+      box-sizing border-box
 
       +.group-group
         margin-top 0
@@ -314,6 +316,8 @@
         padding 10px 15px
         background #fafafa
         border-radius 4px
+        box-sizing border-box
+        width 100%
 
         .name
           font-size 16px
