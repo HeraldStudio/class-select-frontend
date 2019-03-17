@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export default axios.create({
   baseURL: '/jysserv/',
+  //baseURL:'http://localhost:8087/',
   timeout: 20000,
   validateStatus (status) {
     if (status >= 400) {
