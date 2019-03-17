@@ -199,7 +199,7 @@
   .logo
     width 100px
     height 100px
-    margin-bottom 30px
+    margin-bottom 20px
 
   .title
     font-size 28px
@@ -234,7 +234,7 @@
         border none
         padding 10px
         border-radius 4px
-        margin 10px 0
+        margin 5px 0
         font-size 14px
         width 100%
         background #f0f0f0
