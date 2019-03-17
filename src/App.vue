@@ -221,7 +221,7 @@
     justify-content center
 
     .form
-      padding 30px 0
+      padding 10px 0
       display flex
       flex-direction column
       align-items stretch
