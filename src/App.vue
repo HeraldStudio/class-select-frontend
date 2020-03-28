@@ -10,9 +10,10 @@
         input.phone(@keypress.enter='login()' v-model='phone' placeholder='手机号码（若已设置可不填）')
         input.qq(@keypress.enter='login()' v-model='qq' placeholder='QQ号码（若已设置可不填）')
         button.submit(@click='login()') 登录
-      p.footer 东南大学学生事务服务中心 小猴偷米工作室 联合开发
+      p.footer 东南大学学生事务服务中心 信使计划工作室 联合开发
       p.footer 建议使用 Chrome / Safari / Firefox / Edge 浏览器
       p.footer 选课仅代表个人意向，结果请以公布名单为准
+      p.footer 如果出现连接异常，可使用东南大学VPN重试
     div.select(v-else)
       img.logo(src='static/logo.jpg' ondragstart='return false')
       p.title 金钥匙计划选课系统
