@@ -37,10 +37,11 @@
           div.class(:class='{ selected: clazz.selected }' v-if='group.classes && group.classes.length' v-for='clazz in group.classes')
             div.info
               p.name {{ clazz.name }}
-              p.desc {{ clazz.desc }}；
+              p.desc {{ clazz.desc }}
                 span(v-if='clazz.capacity - clazz.count') 剩余约{{ clazz.capacity - clazz.count }}个名额
                 span(v-else) 名额已满
-            button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected') 退选
+              p.desc 周{{ weekday2Chinses[clazz.weekday] }} {{ clazz.startTime }} 至 {{ clazz.endTime }}
+            button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected' ) 退选
             button.pick(@click='select(clazz.cid)' v-else) 选择
           div.empty(v-if='!group.classes.length')
             p 该方向下没有课程
@@ -71,10 +72,19 @@
         username: '',
         list: [],
         canRefresh: true,
-        isLoading: false
+        isLoading: false,
+        weekday2Chinses:{
+          '1':'一',
+          '2':'二',
+          '3':'三',
+          '4':'四',
+          '5':'五',
+          '6':'六',
+          '7':'日'
+        }
       }
     },
-    async created () {
+    async created() {
       logger.bindAjax()
       logger.bindXhrOpen(() => this.isLoading = true)
       logger.bindXhrDone(() => this.isLoading = false)
