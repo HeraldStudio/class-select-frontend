@@ -41,7 +41,9 @@
                 span(v-if='clazz.capacity - clazz.count') 剩余约{{ clazz.capacity - clazz.count }}个名额
                 span(v-else) 名额已满
               p.desc 周{{ weekday2Chinses[clazz.weekday] }} {{ clazz.startTime }} 至 {{ clazz.endTime }}
-            button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected' ) 退选
+              p.desc(v-if='clazz.selected && !clazz.canDelete') 兑换课程禁止退换
+            button.pick(@click='deselect(clazz.cid)' v-if='clazz.selected && clazz.canDelete' ) 退选
+            button.pick(v-else-if='clazz.selected && !clazz.canDelete' style='color:#C0C4CC;' :disabled='true') 退选
             button.pick(@click='select(clazz.cid)' v-else) 选择
           div.empty(v-if='!group.classes.length')
             p 该方向下没有课程
@@ -144,7 +146,10 @@
           this.list = this.list.map(k => {
             k.groups = k.groups.map(g => {
               g.classes = g.classes.map(c => {
-                if (c.cid === cid) c.selected = true
+                if (c.cid === cid) {
+                  c.selected = true
+                  c.canDelete = true
+                }
                 return c
               })
               return g
