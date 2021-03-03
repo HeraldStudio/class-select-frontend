@@ -51,7 +51,7 @@
     "optimize-css-assets-webpack-plugin": "^2.0.0",
     "ora": "^1.2.0",
     "postcss-salad": "^2.0.1",
-    "pug": "^2.0.0-rc.4",
+    "pug": "^3.0.1",
     "pug-filters": "^2.1.5",
     "pug-loader": "^2.3.0",
     "rimraf": "^2.6.2",
